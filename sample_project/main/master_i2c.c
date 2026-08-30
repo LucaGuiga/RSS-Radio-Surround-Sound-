@@ -19,6 +19,8 @@
 //         .flags.enable_internal_pullup = true,
 //     };
 
+
+
 esp_err_t i2c_master_init(i2c_clock_source_t clk_src, i2c_port_num_t  i2c_port,int scl_pin_num, int sda_pin_num, uint8_t glitch_ignore_cnt, bool internal_pullup,i2c_master_bus_handle_t* bus_handle){
     // configuration function
     i2c_master_bus_config_t i2c_mst_config = { 
@@ -56,6 +58,10 @@ esp_err_t i2c_target_init(i2c_addr_bit_len_t  target_addr_length, uint16_t targe
     .scl_speed_hz = scl_freq,
     };
     return i2c_master_bus_add_device(bus_handle, &dev_cfg, dev_handle);
+}
+
+esp_err_t i2c_read_write(i2c_master_dev_handle_t dev_handle, uint8_t* reg_address, size_t reg_address_size,uint8_t* recieved_data,size_t read_size, int timeout_value ){
+    return i2c_master_transmit_receive(dev_handle, reg_address, reg_address_size, recieved_data, read_size, timeout_value);
 }
 
 
@@ -106,9 +112,12 @@ void app_main(void)
 
     printf("trying to read/write data");
 
-    // printf("starting read/write sequence\n"); //with no device it shouldnt say anything after this or it should throw an error
-    // uint8_t reg_address[2] = {0x00,0x20} ;// the specifi register of the .device you want to talk to 
-    // uint8_t recieved_data[4]; // a home for the data you recieved 
+    printf("starting read/write sequence\n"); //with no device it shouldnt say anything after this or it should throw an error
+    uint8_t reg_address[2] = {0x00,0x20} ;// the specifi register of the .device you want to talk to 
+    uint8_t recieved_data[4]; // a home for the data you recieved 
+    size_t read_size = 4;
+    //below will probably definitely fail if not connected 
+    ESP_ERROR_CHECK(i2c_read_write(dev_handle,reg_address,sizeof(reg_address), recieved_data,read_size,1000)); //not &reg_address or &received_data because decays to pointer already
     // ESP_ERROR_CHECK(i2c_master_transmit_receive(dev_handle, reg_address, sizeof(reg_address), recieved_data, 4, 1000));
 }
 

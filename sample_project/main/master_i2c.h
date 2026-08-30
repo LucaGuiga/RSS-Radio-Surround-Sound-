@@ -23,4 +23,7 @@ esp_err_t i2c_master_init(i2c_clock_source_t clk_src,i2c_port_num_t  i2c_port,in
 // for target_addr_legnth use the espressif i2c length constants
 esp_err_t i2c_target_init(i2c_addr_bit_len_t  target_addr_length, uint16_t target_address,uint32_t scl_freq,i2c_master_dev_handle_t* dev_handle ,i2c_master_bus_handle_t bus_handle );
 
+// wrapper for i2c_master_transmit_recieve
+esp_err_t i2c_read_write(i2c_master_dev_handle_t dev_handle, uint8_t* reg_address, size_t reg_address_size,uint8_t* recieved_data,size_t read_size, int timeout_value );
+
 #endif 
