@@ -8,6 +8,11 @@
 #include <stdbool.h>
 #include "driver/i2c_master.h"
 #include "esp_err.h"
+
+#define glitch_ignore_count 7
+#define xm125_address 0x52 // this is the slave (xm-125) address
+#define scl_frequency 100000 //replace this with what it needs to be
+#define i2c_port_0 I2C_NUM_0
 #define i2c_scl_pin 22
 #define i2c_sda_pin 21
 
@@ -25,5 +30,7 @@ esp_err_t i2c_target_init(i2c_addr_bit_len_t  target_addr_length, uint16_t targe
 
 // wrapper for i2c_master_transmit_recieve
 esp_err_t i2c_read_write(i2c_master_dev_handle_t dev_handle, uint8_t* reg_address, size_t reg_address_size,uint8_t* recieved_data,size_t read_size, int timeout_value );
+
+
 
 #endif 

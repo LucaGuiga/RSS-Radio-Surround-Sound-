@@ -52,7 +52,7 @@ bool cb_get(CircularBuffer* cb, uint8_t* data){
     return true;
 }
 
-#define testing_cb
+// #define testing_cb
 #ifdef testing_cb
 /*testing cb*/
 

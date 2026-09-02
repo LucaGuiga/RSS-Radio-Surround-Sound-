@@ -5,11 +5,6 @@
 #include "esp_err.h"
 #include "master_i2c.h"
 
-
-#define glitch_ignore_count 7
-#define xm125_address 0x52 // this is the slave (xm-125) address
-#define scl_frequency 100000 //replace this with what it needs to be
-#define i2c_port_0 I2C_NUM_0
 // i2c_master_bus_config_t i2c_mst_config = { 
 //         .clk_source = I2C_CLK_SRC_DEFAULT,
 //         .i2c_port = i2c_port_0,
@@ -64,7 +59,6 @@ esp_err_t i2c_read_write(i2c_master_dev_handle_t dev_handle, uint8_t* reg_addres
     return i2c_master_transmit_receive(dev_handle, reg_address, reg_address_size, recieved_data, read_size, timeout_value);
 }
 
-
 /* 
 //should be in the main to throw an error 
 i2c_master_dev_handle_t dev_handle;
@@ -86,7 +80,7 @@ ESP_ERROR_CHECK(i2c_master_transmit_receive(dev_handle, buf, sizeof(buf), buffer
 parameters in order which i2c device, buf pointer of buffers you want to write, sizeof(buf) number of bytes to write from buf, buffer where received bytes should live, 2 number of bytes to read, -1 timeout value
 */
 
-#define master_test_bench
+// #define master_test_bench
 #ifdef master_test_bench
 
 void app_main(void)

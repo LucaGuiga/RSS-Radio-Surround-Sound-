@@ -5,8 +5,7 @@
 #include "esp_err.h"
 #include "alarm.h"
 #include "driver/gptimer.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+
 
 
 
@@ -97,7 +96,7 @@ bool get_alarm0_flag(){
 // // Start the timer
 // ESP_ERROR_CHECK(gptimer_start(gptimer_0));
 
-#define alarm_test_bench
+// #define alarm_test_bench
 #ifdef alarm_test_bench
 
 

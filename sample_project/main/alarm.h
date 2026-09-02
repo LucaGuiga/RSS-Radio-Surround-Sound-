@@ -18,6 +18,8 @@ set alarm status
 #define ALARM_H
 #include <stdbool.h>
 #include "esp_err.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 // alarm period is 1 second
 #define ALARM_PERIOD 500000*2 
